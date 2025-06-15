@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Medical Records</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fa;
+    }
+
+    .container {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #ffffff;
+      border-right: 1px solid #e2e8f0;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f766e;
+      margin-bottom: 24px;
+    }
+
+    .sidebar .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .sidebar .profile-initials {
+      background-color: #cbd5e1;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #1e293b;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #334155;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      font-weight: 500;
+      transition: background 0.2s ease;
+    }
+
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background-color: #e0f2fe;
+      color: #0284c7;
+    }
+
+    .sidebar .logout {
+      color: #ef4444;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .sidebar .logout:hover {
+      background-color: #fee2e2;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 26px;
+      color: #0f172a;
+    }
+
+    .record-header button {
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid #d1d5db;
+        background: #f9fafb;
+        color: #1f2937;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .record-header button:hover {
+        background: #e0f2f1;
+        color: #0f766e;
+    }
+
+    .add-btn {
+        background: #0f766e;
+        color: white;
+        border: none;
+    }
+
+    .add-btn:hover {
+        background: #0f9d8e;
+    }
+
+
+    .tabs {
+      display: flex;
+      gap: 20px;
+      border-bottom: 2px solid #e5e7eb;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      border-bottom: 3px solid #0f766e;
+      color: #0f766e;
+      font-weight: bold;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filters input, .filters select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .timeline, .metrics, .allergies-meds {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .entry {
+      border-left: 3px solid #0f766e;
+      padding-left: 10px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .entry::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: #0f766e;
+      border-radius: 50%;
+      position: absolute;
+      left: -6px;
+      top: 6px;
+    }
+
+    .entry h3 {
+      margin: 0;
+    }
+
+    .entry .status {
+      float: right;
+      background: #d1fae5;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .metrics .chart {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .metrics .chart div {
+      flex: 1;
+    }
+
+    .metrics .switch {
+      margin-top: 10px;
+    }
+
+    .metrics .switch button {
+      padding: 5px 10px;
+      margin-right: 5px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .metrics .switch .active {
+      background: #0f766e;
+      color: white;
+    }
+
+    .allergies-meds {
+      display: flex;
+      gap: 20px;
+    }
+
+    .card {
+      flex: 1;
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .card h4 {
+      margin-top: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 12px;
+      border-radius: 6px;
+      background: #fcd34d;
+      margin-left: 8px;
+    }
+
+    .tag.red { background: #fca5a5; }
+    .tag.yellow { background: #fde68a; }
+
+    .edit-link {
+      float: right;
+      font-size: 14px;
+      color: #0f766e;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+    <div>
+      <div class="logo">MediCare</div>
+      <div class="profile">
+        <div class="profile-initials">JD</div>
+        <div>
+          <div><strong>John Doe</strong></div>
+          <div style="font-size: 12px; color: #64748b;">Patient ID: P-12345</div>
+        </div>
+      </div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="doctors.php">Doctors</a>
+        <a href="records.php">Medical Records</a>
+        <a href="settings.html">Settings</a>
+      </nav>
+    </div>
+    <a class="logout" href="#">Log out</a>
+  </div>
+  <div class="main">
+    <h1>Medical Records</h1>
+
+    <div class="record-header">
+      <div class="info">
+        <strong>John Doe</strong>
+        <span>Patient ID: P-12345</span>
+        <span>DOB: 15 May 1985</span>
+        <span>Blood Type: O+</span>
+        <span>Primary Doctor Name: Dr. Sarah Johnson</span>
+      </div>
+      <div>
+        <button class="export-btn">⬇ Export Records</button>
+        <button class="add-btn">➕ Add New Record</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('history')">Medical History</div>
+      <div class="tab" onclick="showTab('labs')">Lab Results</div>
+      <div class="tab" onclick="showTab('prescriptions')">Prescriptions</div>
+      <div class="tab" onclick="showTab('imaging')">Imaging & Reports</div>
+    </div>
+
+    <div class="filters">
+      <input type="text" placeholder="Search medical records..." />
+      <select>
+        <option>All Records</option>
+        <option>Completed</option>
+        <option>Urgent Care</option>
+      </select>
+      <select>
+        <option>All Departments</option>
+        <option>Cardiology</option>
+        <option>General Practice</option>
+      </select>
+    </div>
+
+    <div id="tab-history">
+      <div class="timeline">
+        <h2>Medical History Timeline</h2>
+        <div class="entry">
+          <h3>Annual Physical Examination <span class="status">Completed</span></h3>
+          <p>Dr. Sarah Johnson - Cardiology</p>
+          <p>Routine examination. Patient feeling well. Blood pressure normal.</p>
+          <small>15 May 2023 - 10:30 AM</small>
+        </div>
+        <div class="entry">
+          <h3>Acute Bronchitis <span class="status" style="background:#fee2e2;">Urgent Care</span></h3>
+          <p>Dr. Michael Chen - General Practice</p>
+          <p>Persistent cough, mild fever. Prescribed antibiotics and rest.</p>
+          <small>12 November 2022 - 4:30 PM</small>
+        </div>
+      </div>
+
+      <div class="allergies-meds">
+        <div class="card">
+          <h4>Allergies <span class="edit-link">Edit</span></h4>
+          <ul>
+            <li>🚨 Penicillin <span class="tag red">Severe</span></li>
+            <li>⚠️ Peanuts <span class="tag yellow">Moderate</span></li>
+            <li>⚠️ Latex <span class="tag yellow">Moderate</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Current Medications <span class="edit-link">Edit</span></h4>
+          <ul>
+            <li>💊 Lisinopril 10mg — blood pressure</li>
+            <li>💊 Atorvastatin 20mg — cholesterol</li>
+            <li>💊 Vitamin D3 1000 IU — supplement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-labs" style="display:none;"><p>🧪 Lab Results will go here...</p></div>
+    <div id="tab-prescriptions" style="display:none;"><p>📜 Prescription History will go here...</p></div>
+    <div id="tab-imaging" style="display:none;"><p>🖼️ Imaging Reports will go here...</p></div>
+  </div>
+</div>
+
+<script>
+  function showTab(tabId) {
+    const tabs = document.querySelectorAll('.tab');
+    const contents = ['history', 'labs', 'prescriptions', 'imaging'];
+
+    tabs.forEach(tab => tab.classList.remove('active'));
+    contents.forEach(id => document.getElementById(`tab-${id}`).style.display = 'none');
+
+    document.querySelector(`.tab[onclick*="${tabId}"]`).classList.add('active');
+    document.getElementById(`tab-${tabId}`).style.display = 'block';
+  }
+</script>
+
+<!-- Add Record Button -->
+
+
+<!-- Modal -->
+<div id="addRecordModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);">
+  <div style="background-color: #fff; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 400px; border-radius: 12px;">
+    <h3 style="margin-top: 0;">Add Medical Record</h3>
+    <form id="addRecordForm">
+      <label>User ID:</label><br>
+      <input type="text" name="user_id" placeholder="User ID" required style="width: 100%; margin-bottom: 12px;"><br>
+
+      <label>Doctor Name:</label><br>
+      <input type="text" name="doctor_name" required style="width: 100%; margin-bottom: 12px;"></select><br>
+
+      <label>Description:</label><br>
+      <textarea name="description" required style="width: 100%; margin-bottom: 12px;"></textarea><br>
+
+      <button type="submit" style="background-color: #0f766e; color: white; padding: 10px 16px; border: none; border-radius: 8px; font-weight: 600;">Add</button>
+      <button type="button" id="closeAddRecordModal" style="margin-left: 10px; background-color: #e2e8f0; padding: 10px 16px; border: none; border-radius: 8px;">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<script>
+document.querySelector('.add-btn').onclick = function () {
+  document.getElementById('addRecordModal').style.display = 'block';
+  fetch('doctors.php')
+    .then(response => response.json())
+    .then(data => {
+      const select = document.getElementById('doctorSelect');
+      select.innerHTML = '';
+      data.forEach(doc => {
+        const opt = document.createElement('option');
+        opt.value = doc.id;
+        opt.textContent = doc.name;
+        select.appendChild(opt);
+      });
+    });
+};
+
+document.getElementById('closeAddRecordModal').onclick = function () {
+  document.getElementById('addRecordModal').style.display = 'none';
+};
+
+document.getElementById('addRecordForm').onsubmit = function (e) {
+  e.preventDefault();
+  const formData = new FormData(this);
+  fetch('add_medical_records.php', {
+    method: 'POST',
+    body: formData
+  }).then(res => res.text())
+    .then(response => {
+      alert('Medical record added!');
+      location.reload();
+    });
+};
+</script>
+
+</body>
+</html>

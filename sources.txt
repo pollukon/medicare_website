@@ -1,0 +1,10 @@
+
+This project uses the base HTML/CSS layout prepared by the student.
+
+All PHP backend code for CRUD operations (patients, doctors, records) was written by the student for educational purposes.
+
+No external open-source code was copied or reused in the backend logic.
+
+---
+
+If any additional external templates or libraries are added later, they should be listed here with source links.

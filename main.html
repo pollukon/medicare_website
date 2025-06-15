@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #f4fafa;
+      color: #1a1a1a;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 80px;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f766e;
+      margin-bottom: 24px;
+    }
+
+
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .btn-portal {
+      background-color: #0c6b58;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 80px;
+      background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+    }
+
+    .hero-text {
+      flex: 1;
+      margin-right: 40px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #444;
+    }
+
+    .hero-buttons button {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 2px solid #0c6b58;
+      margin-right: 15px;
+      cursor: pointer;
+    }
+
+    .hero-buttons .primary {
+      background-color: #0c6b58;
+      color: white;
+    }
+
+    .hero-buttons .secondary {
+      background-color: white;
+      color: #0c6b58;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+      background-color: #ccc;
+      border-radius: 12px;
+    }
+
+    .services {
+      padding: 60px 80px;
+      background-color: #f9fbfc;
+      text-align: center;
+    }
+
+    .services h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .services p {
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .service-card {
+      background-color: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      text-align: left;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-card h3 {
+      margin: 16px 0 8px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0c6b58;
+    }
+
+    .service-card p {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .service-card a {
+      display: inline-block;
+      margin-top: 16px;
+      color: #0c6b58;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .service-card a::after {
+      content: ' \2192';
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">MediCare Hospital</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">Doctors</a>
+      <a href="#">Contact</a>
+    </nav>
+    <a href="login.html"><button class="btn-portal">Patient Portal</button></a>
+  </header>
+
+<section class="hero" style="display: flex; align-items: center; justify-content: space-between; background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); padding: 80px; flex-wrap: wrap;">
+  <div style="flex: 1; min-width: 300px; max-width: 600px;">
+    <h1 style="font-size: 3rem; font-weight: 700; color: #1a1a1a; margin-bottom: 20px;">Your Health Is Our Priority</h1>
+    <p style="font-size: 1.1rem; margin-bottom: 30px; color: #444;">MediCare Hospital provides exceptional healthcare services with state-of-the-art facilities and compassionate care from our expert medical professionals.</p>
+    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+      <button style="padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; border: none; background-color: #0c6b58; color: white; cursor: pointer;">Make an Appointment</button>
+      <button style="padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; border: 2px solid #0c6b58; background-color: white; color: #0c6b58; cursor: pointer;">Our Services</button>
+    </div>
+  </div>
+  <div style="flex: 1; min-width: 300px; text-align: center;">
+    <img src="hospital-illustration.png" alt="Hospital Illustration" style="width: 100%; max-width: 700px;">
+  </div>
+</section>
+
+  <section class="services">
+    <h2>Our Services</h2>
+    <p>We provide comprehensive healthcare services to meet all your medical needs with the highest standards of care.</p>
+    <div class="card-grid">
+      <div class="service-card">
+        <h3>Primary Care</h3>
+        <p>Comprehensive healthcare services for all ages, including preventive care and chronic disease management.</p>
+        <a href="#">Learn more</a>
+      </div>
+      <div class="service-card">
+        <h3>Cardiology</h3>
+        <p>Specialized care for heart conditions with advanced diagnostics and treatment from expert cardiologists.</p>
+        <a href="#">Learn more</a>
+      </div>
+      <div class="service-card">
+        <h3>Laboratory Services</h3>
+        <p>State-of-the-art diagnostic testing with fast and accurate results for better healthcare decisions.</p>
+        <a href="#">Learn more</a>
+      </div>
+      <div class="service-card">
+        <h3>Emergency Care</h3>
+        <p>24/7 emergency services with rapid response teams ready for immediate care for critical conditions.</p>
+        <a href="#">Learn more</a>
+      </div>
+      <div class="service-card">
+        <h3>Pharmacy</h3>
+        <p>Full-service pharmacy for prescriptions, over-the-counter products, and pharmacist consultations.</p>
+        <a href="#">Learn more</a>
+      </div>
+      <div class="service-card">
+        <h3>Surgical Services</h3>
+        <p>Advanced surgical procedures performed by skilled surgeons using the latest techniques and technology.</p>
+        <a href="#">Learn more</a>
+      </div>
+    </div>
+  </section>
+  <section class="appointment" style="padding: 80px; background-color: #0c6b58;">
+    <div style="max-width: 1000px; margin: 0 auto; display: flex; gap: 60px; align-items: flex-start; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 280px;">
+        <h2 style="font-size: 2.5rem; font-weight: 700; color: #ffffff; margin-bottom: 16px;">Request an Appointment</h2>
+        <p style="font-size: 1.1rem; color: #ffffff; line-height: 1.6;">Fill out the form and we will contact you to confirm your appointment details. Our team is available 24/7 to help you get the care you need.</p>
+        </div>
+
+      <form style="flex: 1; min-width: 280px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; background-color: #ffffff; padding: 32px; border-radius: 16px; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);">
+        <input type="text" placeholder="Full Name" required style="padding: 12px; border: 1px solid #ccc; border-radius: 8px; grid-column: span 2;">
+        <input type="email" placeholder="Email Address" required style="padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+        <input type="tel" placeholder="Phone Number" required style="padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+        <select required style="padding: 12px; border: 1px solid #ccc; border-radius: 8px; grid-column: span 2;">
+          <option value="">Choose a Department</option>
+          <option value="Primary Care">Primary Care</option>
+          <option value="Cardiology">Cardiology</option>
+          <option value="Laboratory">Laboratory</option>
+          <option value="Emergency">Emergency</option>
+          <option value="Pharmacy">Pharmacy</option>
+          <option value="Surgery">Surgery</option>
+        </select>
+        <textarea placeholder="Your Message" rows="4" style="padding: 12px; border: 1px solid #ccc; border-radius: 8px; grid-column: span 2;"></textarea>
+        <button type="submit" style="grid-column: span 2; padding: 14px; background-color: #0c6b58; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer;">Book Now</button>
+      </form>
+    </div>
+  </section>
+    <footer style="background-color: #000000; color: white; padding: 40px 80px;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 40px;">
+      <div style="flex: 1; min-width: 250px;">
+        <h3 style="font-size: 1.5rem; margin-bottom: 16px;">MediCare Hospital</h3>
+        <p style="line-height: 1.6;">Providing quality healthcare and compassionate services since 1995. Your health is our mission.</p>
+      </div>
+      <div style="flex: 1; min-width: 150px;">
+        <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Quick Links</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#" style="color: white; text-decoration: none; line-height: 2;">Home</a></li>
+          <li><a href="#" style="color: white; text-decoration: none; line-height: 2;">Services</a></li>
+          <li><a href="#" style="color: white; text-decoration: none; line-height: 2;">Doctors</a></li>
+          <li><a href="#" style="color: white; text-decoration: none; line-height: 2;">Contact</a></li>
+        </ul>
+      </div>
+      <div style="flex: 1; min-width: 200px;">
+        <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Contact Info</h4>
+        <p>📍 123 Health St, Wellness City</p>
+        <p>📞 (123) 456-7890</p>
+        <p>✉️ info@medicare.com</p>
+      </div>
+    </div>
+    <p style="text-align: center; margin-top: 40px; font-size: 0.9rem;">&copy; 2025 MediCare Hospital. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      color: #0f172a;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #ffffff;
+      border-right: 1px solid #e2e8f0;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f766e;
+      margin-bottom: 24px;
+    }
+
+    .sidebar .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .sidebar .profile-initials {
+      background-color: #cbd5e1;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #1e293b;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #334155;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      font-weight: 500;
+      transition: background 0.2s ease;
+    }
+
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background-color: #e0f2fe;
+      color: #0284c7;
+    }
+
+    .sidebar .logout {
+      color: #ef4444;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .sidebar .logout:hover {
+      background-color: #fee2e2;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 32px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .tab {
+      font-weight: 600;
+      padding-bottom: 8px;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      color: #475569;
+    }
+
+    .tab.active {
+      color: #0f172a;
+      border-bottom: 2px solid #4f46e5;
+    }
+
+    .settings-section {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .setting-row {
+      margin-bottom: 20px;
+    }
+
+    .setting-row label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 15px;
+      color: #0f172a;
+    }
+
+    .toggle-switch, select, input[type="email"], input[type="range"] {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      width: 100%;
+      font-size: 14px;
+      color: #0f172a;
+    }
+
+    .save-btn {
+      background-color: #4f46e5;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .save-btn:hover {
+      background-color: #4338ca;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.tab');
+      const sections = {
+        'General': `
+          <div class="setting-row">
+            <label for="language">Language</label>
+            <select id="language">
+              <option>English</option>
+              <option>Turkish</option>
+            </select>
+          </div>
+          <div class="setting-row">
+            <label for="font-size">Font Size</label>
+            <input type="range" id="font-size" min="0" max="2" value="1">
+          </div>`
+        ,
+        'Account': `
+          <div class="setting-row">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" value="user@example.com">
+          </div>
+          <div class="setting-row">
+            <label>Password</label>
+            <button class="save-btn">Change Password</button>
+          </div>
+          <div class="setting-row">
+            <label>Danger Zone</label>
+            <button style="background:#ef4444" class="save-btn">Delete Account</button>
+          </div>`
+        ,
+        'Notifications': `
+          <div class="setting-row">
+            <label>Push Notifications</label>
+            <input type="checkbox" checked>
+          </div>
+          <div class="setting-row">
+            <label>Email Notifications</label>
+            <input type="checkbox" checked>
+          </div>
+          <div class="setting-row">
+            <label>Marketing Emails</label>
+            <input type="checkbox">
+          </div>
+          <div class="setting-row">
+            <label>Notification Frequency</label><br>
+            <label><input type="radio" name="notif" checked> Real-time</label>
+            <label><input type="radio" name="notif"> Daily digest</label>
+            <label><input type="radio" name="notif"> Weekly digest</label>
+          </div>`
+        ,
+        'Privacy': `
+          <div class="setting-row">
+            <label for="visibility">Profile Visibility</label>
+            <select id="visibility">
+              <option>Everyone</option>
+              <option>Only Me</option>
+            </select>
+          </div>
+          <div class="setting-row">
+            <label>Activity Status</label>
+            <input type="checkbox" checked>
+          </div>
+          <div class="setting-row">
+            <label>Data Collection</label>
+            <input type="checkbox" checked>
+          </div>
+          <div class="setting-row">
+            <label>Blocked Users</label>
+            <button class="save-btn">View Blocked Users</button>
+          </div>`
+      };
+
+      const section = document.querySelector('.settings-section');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          section.innerHTML = sections[tab.textContent] + '<br><button class="save-btn">Save Changes</button>';
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="sidebar">
+    <div>
+      <div class="logo">MediCare</div>
+      <div class="profile">
+        <div class="profile-initials">JD</div>
+        <div>
+          <div><strong>John Doe</strong></div>
+          <div style="font-size: 12px; color: #64748b;">Patient ID: P-12345</div>
+        </div>
+      </div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="doctors.php">Doctors</a>
+        <a href="records.php">Medical Records</a>
+        <a href="settings.html">Settings</a>
+      </nav>
+    </div>
+    <a class="logout" href="#">Log out</a>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <div class="tab active">General</div>
+      <div class="tab">Account</div>
+      <div class="tab">Notifications</div>
+      <div class="tab">Privacy</div>
+    </div>
+
+    <div class="settings-section">
+      <div class="setting-row">
+        <label for="dark-mode">Dark Mode</label>
+        <input type="checkbox" id="dark-mode" class="toggle-switch">
+      </div>
+
+      <div class="setting-row">
+        <label for="language">Language</label>
+        <select id="language">
+          <option>English</option>
+          <option>Turkish</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <label for="auto-save">Auto-save</label>
+        <input type="checkbox" id="auto-save" class="toggle-switch" checked>
+      </div>
+
+      <div class="setting-row">
+        <label for="font-size">Font Size</label>
+        <input type="range" id="font-size" min="0" max="2" value="1">
+      </div>
+
+      <br><button class="save-btn">Save Changes</button>
+    </div>
+  </div>
+</body>
+</html>
